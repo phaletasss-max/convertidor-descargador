@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador de Videos - YouTube, TikTok, IG, FB</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo">
+                <i class="fas fa-cloud-download-alt"></i>
+                <span>GlobinDownloader</span>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="active"><i class="fas fa-video"></i> Videos</a>
+                <a href="#convertidor"><i class="fas fa-exchange-alt"></i> Convertidor</a>
+                <a href="#ayuda"><i class="fas fa-question-circle"></i> Ayuda</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Descarga videos de cualquier plataforma</h1>
+            <p class="subtitle">YouTube, TikTok, Instagram, Facebook, Twitter/X - MP4 o MP3 en segundos</p>
+            
+            <!-- Plataformas soportadas -->
+            <div class="platforms">
+                <div class="platform-icon"><i class="fab fa-youtube"></i><span>YouTube</span></div>
+                <div class="platform-icon"><i class="fab fa-tiktok"></i><span>TikTok</span></div>
+                <div class="platform-icon"><i class="fab fa-instagram"></i><span>Instagram</span></div>
+                <div class="platform-icon"><i class="fab fa-facebook"></i><span>Facebook</span></div>
+                <div class="platform-icon"><i class="fab fa-twitter"></i><span>Twitter/X</span></div>
+            </div>
+        </section>
+
+        <!-- Main Download Card -->
+        <main class="main-card">
+            <!-- URL Input -->
+            <div class="url-section">
+                <div class="input-wrapper">
+                    <i class="fas fa-link"></i>
+                    <input type="url" id="videoUrl" placeholder="Pega el link del video aqui... (YouTube, TikTok, Instagram, Facebook)">
+                    <button id="btnPaste" class="btn-paste" title="Pegar"><i class="fas fa-paste"></i></button>
+                </div>
+            </div>
+
+            <!-- Preview Section (auto-aparece) -->
+            <div id="infoPreview" class="preview-section hidden">
+                <div class="preview-card">
+                    <div class="preview-thumb">
+                        <img id="previewImg" src="" alt="Preview">
+                        <span id="previewDuration" class="duration-badge"></span>
+                    </div>
+                    <div class="preview-info">
+                        <h3 id="infoTitulo">Titulo del video</h3>
+                        <p id="infoAutor"><i class="fas fa-user"></i> Canal</p>
+                        <p id="infoPeso"><i class="fas fa-weight-hanging"></i> ~0 MB</p>
+                        <span id="infoPlataforma" class="platform-badge">YouTube</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="options-section">
+                <div class="option-group">
+                    <label><i class="fas fa-file-audio"></i> Formato:</label>
+                    <div class="format-selector">
+                        <button class="format-btn active" data-format="mp4">
+                            <i class="fas fa-film"></i>
+                            <span>MP4</span>
+                            <small>Video</small>
+                        </button>
+                        <button class="format-btn" data-format="mp3">
+                            <i class="fas fa-music"></i>
+                            <span>MP3</span>
+                            <small>Solo audio</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="option-group" id="calidadGroup">
+                    <label><i class="fas fa-sliders-h"></i> Calidad:</label>
+                    <select id="selectCalidad" class="calidad-select">
+                        <option value="best">Mejor calidad disponible</option>
+                        <option value="1080">1080p (Full HD)</option>
+                        <option value="720">720p (HD)</option>
+                        <option value="480">480p</option>
+                        <option value="360">360p</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <button id="btnDescargar" class="btn-download">
+                <i class="fas fa-download"></i>
+                <span>Descargar Ahora</span>
+            </button>
+
+            <!-- Status -->
+            <div id="downloadStatus" class="status-section hidden">
+                <div class="progress-ring">
+                    <div class="spinner"></div>
+                </div>
+                <p id="statusText">Preparando descarga...</p>
+            </div>
+
+            <!-- Success -->
+            <div id="downloadResult" class="result-section hidden">
+                <i class="fas fa-check-circle"></i>
+                <p>Descarga completada en tu PC!</p>
+            </div>
+        </main>
+
+        <!-- Convertidor Section -->
+        <!-- Convertidor Section -->
+        <section id="convertidor" class="convertidor-section">
+            <h2><i class="fas fa-exchange-alt"></i> GlobinConverter</h2>
+            <p class="section-desc">Convierte archivos facilmente. Arrastra, selecciona o pega tu archivo.</p>
+            
+            <!-- Como Usar -->
+            <div class="how-to-use">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Arrastra o selecciona tu archivo</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <i class="fas fa-mouse-pointer"></i>
+                    <p>Elige el formato de salida</p>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <i class="fas fa-download"></i>
+                    <p>Descarga tu archivo convertido</p>
+                </div>
+            </div>
+
+            <!-- Drop Zone -->
+            <div class="drop-zone" id="dropZone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Arrastra archivos aqui o <span class="click-upload">haz click para seleccionar</span></p>
+                <input type="file" id="fileInput" hidden>
+                <small class="supported-formats">PDF, Word, JPG, PNG, WebP, MP4</small>
+            </div>
+
+            <!-- File Info -->
+            <div id="fileInfo" class="file-info hidden">
+                <i class="fas fa-file"></i>
+                <span id="fileName">archivo.pdf</span>
+                <span id="fileSize">2.5 MB</span>
+            </div>
+
+            <!-- Conversion Selector -->
+            <div id="conversionSelector" class="conversion-selector hidden">
+                <label>Convertir a:</label>
+                <div class="convert-buttons" id="convertButtons">
+                    <!-- Se genera dinamicamente segun el archivo -->
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div id="convertStatus" class="status-section hidden">
+                <div class="spinner"></div>
+                <p id="convertStatusText">Convirtiendo...</p>
+            </div>
+
+            <!-- Grid de conversiones disponibles -->
+            <div class="convert-grid" id="convertGrid">
+                <div class="convert-card active" data-type="pdf-to-word">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>PDF a Word</h3>
+                    <p>Convierte PDF a DOCX editable</p>
+                </div>
+                <div class="convert-card active" data-type="word-to-pdf">
+                    <i class="fas fa-file-word"></i>
+                    <h3>Word a PDF</h3>
+                    <p>Exporta documentos a PDF</p>
+                </div>
+                <div class="convert-card active" data-type="jpg-to-png">
+                    <i class="fas fa-file-image"></i>
+                    <h3>JPG a PNG</h3>
+                    <p>Imagen sin perdida de calidad</p>
+                </div>
+                <div class="convert-card active" data-type="png-to-jpg">
+                    <i class="fas fa-image"></i>
+                    <h3>PNG a JPG</h3>
+                    <p>Comprime imagenes</p>
+                </div>
+                <div class="convert-card active" data-type="webp-to-jpg">
+                    <i class="fas fa-images"></i>
+                    <h3>WebP a JPG</h3>
+                    <p>Compatible con todo</p>
+                </div>
+                <div class="convert-card active" data-type="jpg-to-webp">
+                    <i class="fab fa-google"></i>
+                    <h3>JPG a WebP</h3>
+                    <p>Formato moderno de Google</p>
+                </div>
+                <div class="convert-card active" data-type="mp4-to-mp3">
+                    <i class="fas fa-music"></i>
+                    <h3>MP4 a MP3</h3>
+                    <p>Extrae audio del video</p>
+                </div>
+                <div class="convert-card active" data-type="compress-image">
+                    <i class="fas fa-compress-alt"></i>
+                    <h3>Comprimir Imagen</h3>
+                    <p>Reduce tamano sin perder calidad</p>
+                </div>
+            </div>
+
+            <!-- Proximamente -->
+            <div class="soon-section">
+                <h3><i class="fas fa-rocket"></i> Proximamente</h3>
+                <div class="soon-grid">
+                    <span><i class="fas fa-file-excel"></i> Excel a PDF</span>
+                    <span><i class="fas fa-file-powerpoint"></i> PPTX a PDF</span>
+                    <span><i class="fas fa-object-group"></i> Combinar PDF</span>
+                    <span><i class="fas fa-cut"></i> Dividir PDF</span>
+                    <span><i class="fas fa-signature"></i> Firmar PDF</span>
+                    <span><i class="fas fa-unlock"></i> Desbloquear PDF</span>
+                    <span><i class="fas fa-qrcode"></i> Generar QR</span>
+                    <span><i class="fas fa-closed-captioning"></i> Transcribir audio</span>
+                </div>
+            </div>
+        </section>
+            <h2><i class="fas fa-exchange-alt"></i> Convertidor de Archivos</h2>
+            <p class="section-desc">Convierte entre formatos facilmente</p>
+            
+            <div class="convert-grid">
+                <div class="convert-card">
+                    <i class="fas fa-file-video"></i>
+                    <h3>MP4 a MP3</h3>
+                    <p>Extrae el audio de cualquier video</p>
+                    <span class="soon-badge">Proximamente</span>
+                </div>
+                <div class="convert-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>PDF a Word</h3>
+                    <p>Convierte documentos PDF editables</p>
+                    <span class="soon-badge">Proximamente</span>
+                </div>
+                <div class="convert-card">
+                    <i class="fas fa-file-word"></i>
+                    <h3>Word a PDF</h3>
+                    <p>Exporta documentos a PDF</p>
+                    <span class="soon-badge">Proximamente</span>
+                </div>
+                <div class="convert-card">
+                    <i class="fas fa-image"></i>
+                    <h3>WebP a JPG</h3>
+                    <p>Convierte imagenes a formato universal</p>
+                    <span class="soon-badge">Proximamente</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Rapido</h3>
+                <p>Descarga directa sin esperas</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Seguro</h3>
+                <p>Sin virus, sin registro</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-infinity"></i>
+                <h3>Ilimitado</h3>
+                <p>Sin limite de descargas</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Multiplataforma</h3>
+                <p>PC, tablet o celular</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p> GlobinDownloader - Gratis y sin limites</p>
+            <p class="small">Los archivos se descargan directamente en tu dispositivo</p>
+        </footer>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-header" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span>Asistente</span>
+            <i class="fas fa-chevron-down" id="chatToggle"></i>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-messages" id="chatContainer">
+                <div class="msg bot">
+                    Hola! Soy tu asistente. Pega un link arriba para descargar videos de YouTube, TikTok, Instagram o Facebook.
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Escribe aqui...">
+                <button id="btnEnviar"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
